@@ -1,0 +1,6 @@
+__pycache__/
+.env
+venv/
+*.pyc
+chroma_db/
+recordings/

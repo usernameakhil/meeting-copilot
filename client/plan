@@ -1,0 +1,26 @@
+my-meeting-copilot/
+├── public/                 # Static assets (logos, icons)
+├── src/
+│   ├── api/                # Axios/Fetch instances & endpoints
+│   │   └── transcribe.js   # Logic for 15s chunk uploads
+│   ├── components/         # Reusable UI (Atomic Design)
+│   │   ├── ui/             # Buttons, Inputs, Cards (Shadcn/UI style)
+│   │   └── recorder/       
+│   │       ├── LiveTranscript.jsx # The scrolling text area
+│   │       └── Controls.jsx       # Mic/Stop buttons
+│   ├── hooks/              # Custom React Hooks
+│   │   ├── useAudioRecorder.js    # Logic for MediaRecorder & slicing
+│   │   └── useIndexedDB.js        # Syncing state with Dexie
+│   ├── lib/                # Third-party configurations
+│   │   ├── db.js           # Dexie.js (IndexedDB) Schema
+│   │   └── supabase.js     # Supabase Client config
+│   ├── services/           # Business logic
+│   │   └── syncService.js  # Logic for "Flush to Cloud" & Beacon API
+│   ├── store/              # Global state (Zustand or Context)
+│   │   └── meetingStore.js # Active meeting metadata
+│   ├── App.jsx             # Main routing and layout
+│   └── main.jsx            # Entry point
+├── .env                    # API Keys (SupaBase, FastAPI URL)
+├── index.html
+├── package.json
+└── vite.config.js

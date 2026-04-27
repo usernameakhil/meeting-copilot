@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  @apply antialiased bg-[#F8FAFC] selection:bg-indigo-100;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300;
+}
