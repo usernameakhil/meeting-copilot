@@ -1,21 +1,9 @@
 # 🎙️ MeetingCopilot: Real-Time Multimodal AI Meeting Intelligence Platform
-
-[![React](https://img.shields.io/badge/Frontend-React%2019-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Bundler-Vite%208-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Groq](https://img.shields.io/badge/ASR-Groq%20Whisper--Large--v3--Turbo-F55036)](https://groq.com/)
-[![Google Gemini](https://img.shields.io/badge/Vision%20%26%20LLM-Gemini%202.5%20Flash-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
-[![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB-FC521F)](https://www.trychroma.com/)
-[![Supabase](https://img.shields.io/badge/Cloud%20DB-Supabase%20Postgres-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
-[![Dexie](https://img.shields.io/badge/Offline--First-Dexie%20IndexedDB-brightgreen)](https://dexie.org/)
-
 > **A real-time, botless meeting copilot that fuses high-throughput audio transcription with live screen/slide visual intelligence.** Fuses 15-second Opus audio streams with keyframe visual slide OCR and architecture diagram understanding into a unified Multimodal RAG knowledge engine.
 
 ---
 
-## 🏆 For Recruiters & Engineering Hiring Managers (At a Glance)
-
-### ❓ The Problem That 99% of "AI Meeting" Projects Ignore
+###  The Problem That 99% of "AI Meeting" Projects Ignore
 Most meeting summarization projects are simple wrappers that pass audio into a standard Whisper script and query an LLM. They suffer from three fatal flaws:
 1. **The Visual Blindspot**: In tech syncs, architecture reviews, and sprint planning, **over 60% of critical decisions happen on shared screens**—slides, system diagrams, Jira boards, and IDE code reviews. Traditional audio-only tools miss all of this.
 2. **Intrusive Bot Lag**: Conventional tools rely on headless browser bots (Puppeteer/Recall.ai) that consume 1–2 GB of server RAM per call, require waiting room admission, and trigger privacy concerns.
@@ -40,15 +28,6 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 | **Server Resource Overhead** | 1 – 2 GB RAM per headless browser instance (Puppeteer) | **0 MB** server bot memory (client-side capture) | **100% server bot cost savings** |
 | **Crash & Refresh Resilience** | Complete session loss on tab reload or network drop | **Dual-layer caching** (Instant IndexedDB write `< 5ms`) | **0% data loss** across unexpected disconnects |
 | **RAG Hallucination Rate** | ~15% – 25% hallucination on open-ended queries | **< 2%** via strict multimodal grounding & `temp: 0.2` | **~90% reduction** in ungrounded answers |
-
----
-
-## 🎯 Resume-Ready Technical Highlights (Copy & Paste Ready)
-
-- **Engineered an end-to-end Multimodal Meeting Intelligence Platform** combining real-time audio streams and visual screen/slide keyframes via WebRTC `getDisplayMedia`, eliminating third-party bot overhead and server costs.
-- **Architected an ultra-low latency transcription pipeline** utilizing Groq LPU hardware running Whisper-Large-v3-Turbo, reducing inference latency from 12s to **~300ms (0.02x RTF)** for 15-second audio chunks.
-- **Implemented a Multimodal RAG architecture** in ChromaDB fusing Gemini 2.5 Flash Vision screen analysis and dense text embeddings (`gemini-embedding-001`), supporting fact-grounded semantic search across visual slides and spoken dialogue.
-- **Designed a resilient, zero-data-loss storage system** utilizing Dexie.js (IndexedDB) for `<5ms` local state recovery, backed by threshold-driven automated synchronization to Supabase PostgreSQL.
 
 ---
 
@@ -141,7 +120,6 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 
 ---
 
-## 🚀 Setup & Execution Guide
 
 ### Prerequisites
 - Node.js `v18+` and `npm`
