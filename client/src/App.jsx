@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RecorderHome from './pages/RecorderHome';
 import History from './pages/History';
-import Chat from './pages/Chat'; // We will build this next
+import Chat from './pages/Chat'; 
 
 function App() {
   return (

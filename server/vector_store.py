@@ -103,4 +103,4 @@ def get_relevant_context(meeting_id, question):
         
     except Exception as e:
         print(f"Retrieval Error: {e}")
-        return ""
+        return " "
