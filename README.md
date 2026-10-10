@@ -33,65 +33,26 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 
 ## 🏛️ Multimodal System Architecture
 
-```
-                                  USER BROWSER (React 19)
-                    ┌──────────────────────────────────────────────────┐
-                    │       WebRTC getDisplayMedia (Tab Capture)       │
-                    └───────────────┬──────────────────┬───────────────┘
-                                    │                  │
-                           Audio Stream (WebM)    Video Stream (Screen/Slides)
-                                    │                  │
-                           15s Chunk Slicer       Canvas Frame-Diff Engine
-                                    │                  │
-                                    ▼                  ▼
-                         [Audio: 15s Opus]     [Visual: Keyframe Snapshots]
-                                    │                  │
-                POST /transcribe    │                  │  Base64 Payload
-                                    ▼                  ▼
-                     ┌─────────────────────────────────────────┐
-                     │            FASTAPI BACKEND              │
-                     │                                         │
-                     │   Single-Worker Async Audio Queue       │
-                     │   Gemini 2.5 Flash Multimodal Vision    │
-                     └─────────────┬─────────────────┬─────────┘
-                                   │                 │
-                Sub-300ms ASR      │                 │ Slide & Diagram OCR
-                                   ▼                 ▼
-                       ┌────────────────┐   ┌─────────────────┐
-                       │ Groq Cloud LPU │   │ Gemini Vision   │
-                       │ Whisper-Turbo  │   │ Visual Summary  │
-                       └───────┬────────┘   └────────┬────────┘
-                               │                     │
-                     Transcribed Spoken Text    Extracted Visual Context
-                               │                     │
-                               └──────────┬──────────┘
-                                          │ Fused Semantic Chunk
-                                          ▼
-                               ┌─────────────────────┐
-                               │ IndexedDB (Dexie)   │ ◄── Real-time Local Backup (<5ms)
-                               │ Supabase Cloud      │ ◄── Auto-Sync Threshold (>100 chars)
-                               └──────────┬──────────┘
-                                          │
-                            Post-Meeting Finalization
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │      CHROMADB VECTOR STORE      │
-                         │                                 │
-                         │  • Text + Slide Visual Chunks   │
-                         │  • 1000 char / 20% Overlap      │
-                         │  • gemini-embedding-001 Vectors │
-                         │  • Metadata: { meeting_id }     │
-                         └────────────────┬────────────────┘
-                                          │
-                                   POST /chat (RAG)
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   GEMINI 2.5 FLASH REASONING    │
-                         │                                 │
-                         │ Answers questions across both   │
-                         │ what was SAID and what was SEEN │
-                         └─────────────────────────────────┘
-```
+<p align="center">
+  <img src="docs/architecture_flowchart.png" alt="MeetingCopilot Multimodal System Architecture Flowchart" width="100%" />
+</p>
+
+### 🔄 End-to-End Architectural Flow Breakdown
+
+1. **Client Tier (React 19 & WebRTC)**
+   - **Dual-Stream Tab Capture**: Captures digital audio and screen video feeds concurrently via browser-native `navigator.mediaDevices.getDisplayMedia`.
+   - **Audio Chunking Engine**: Slices continuous Opus audio streams into 15-second chunks dispatched to the backend.
+   - **Canvas Frame-Diff Slicer**: Detects real-time slide transitions and screen modifications, extracting visual keyframes for slide OCR.
+
+2. **Backend Processing & Cloud Tier (FastAPI, Groq & Gemini Vision)**
+   - **Sub-300ms Speech ASR**: Groq Cloud LPU running `whisper-large-v3-turbo` achieves an unprecedented 0.02x Real-Time Factor.
+   - **Visual Slide Understanding**: Google Gemini 2.5 Flash Vision extracts code blocks, architecture diagrams, and slide text.
+   - **Dual-Layer Persistence**: Real-time `<5ms` local caching via Dexie.js (IndexedDB) with automated threshold syncing (`>100 chars`) to Supabase PostgreSQL.
+
+3. **Multimodal RAG & Knowledge Store (ChromaDB & Gemini 2.5 Flash)**
+   - **Vector Embedding**: Text and visual keyframe annotations are windowed into 1,000-character chunks with 20% overlap and embedded using `gemini-embedding-001`.
+   - **Isolated Semantic Retrieval**: Queries retrieve top-5 relevant chunks constrained by `{ meeting_id }`.
+   - **Grounded Answering Engine**: Gemini 2.5 Flash (`temperature: 0.2`) synthesizes answers strictly grounded in both what was **said** and what was **seen**.
 
 ---
 
