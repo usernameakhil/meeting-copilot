@@ -1,4 +1,4 @@
-# 🎙️ MeetingCopilot: Real-Time Multimodal AI Meeting Intelligence Platform
+# MeetingCopilot: Real-Time Multimodal AI Meeting Intelligence Platform
 > **A real-time, botless meeting copilot that fuses high-throughput audio transcription with live screen/slide visual intelligence.** Fuses 15-second Opus audio streams with keyframe visual slide OCR and architecture diagram understanding into a unified Multimodal RAG knowledge engine.
 
 ---
@@ -9,7 +9,7 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 2. **Intrusive Bot Lag**: Conventional tools rely on headless browser bots (Puppeteer/Recall.ai) that consume 1–2 GB of server RAM per call, require waiting room admission, and trigger privacy concerns.
 3. **High Transcription Latency**: Local or standard cloud Whisper APIs take 8–15 seconds to return speech chunks, making real-time interactive intelligence impossible.
 
-### 💡 How MeetingCopilot Solves This Differently
+###  How MeetingCopilot Solves This Differently
 - **Multimodal Visual Keyframe Engine**: Taps directly into browser-native `getDisplayMedia` to capture both digital audio and visual screen feeds. An in-browser frame differ detects slide transitions and visual updates, extracting keyframes that are analyzed by **Google Gemini 2.5 Flash Vision** and fused into the vector context.
 - **Ultra-Low Latency Speech Pipeline**: Audio is sliced into 15s WebM Opus chunks and processed via **Groq LPU-accelerated Whisper-Large-v3-Turbo**, delivering speech-to-text in **sub-300ms (Real-Time Factor: 0.02x)**.
 - **Unified Multimodal RAG**: Vectorizes both text transcripts and visual screen artifacts into **ChromaDB**, allowing users to query: *"What architecture tradeoffs did we discuss for the diagram shown at minute 14?"*
@@ -17,7 +17,7 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 
 ---
 
-## 📊 Quantified Improvements & Performance Benchmarks
+##  Quantified Improvements & Performance Benchmarks
 
 | Metric / Dimension | Traditional Baseline (Audio-Only / Bots) | MeetingCopilot Architecture | Quantified Improvement |
 | :--- | :--- | :--- | :--- |
@@ -31,13 +31,13 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 
 ---
 
-## 🏛️ Multimodal System Architecture
+##  Multimodal System Architecture
 
 <p align="center">
   <img src="docs/architecture_flowchart.png" alt="MeetingCopilot Multimodal System Architecture Flowchart" width="100%" />
 </p>
 
-### 🔄 End-to-End Architectural Flow Breakdown
+###  End-to-End Architectural Flow Breakdown
 
 1. **Client Tier (React 19 & WebRTC)**
    - **Dual-Stream Tab Capture**: Captures digital audio and screen video feeds concurrently via browser-native `navigator.mediaDevices.getDisplayMedia`.
@@ -56,7 +56,7 @@ Most meeting summarization projects are simple wrappers that pass audio into a s
 
 ---
 
-## 🛠️ Complete Technology Stack
+##  Complete Technology Stack
 
 ### Frontend Engineering
 - **React 19 (`^19.2.4`)**: Concurrent rendering, high-efficiency reactive UI state management.
@@ -162,7 +162,7 @@ create table meetings (
 
 ---
 
-## 📡 REST API Specification
+##  REST API Specification
 
 ### `POST /transcribe`
 - **Description**: Ingests a 15-second WebM audio slice and returns transcribed text.
@@ -198,7 +198,7 @@ create table meetings (
 
 ---
 
-## 📂 Project Directory Structure
+##  Project Directory Structure
 
 ```plaintext
 meeting-copilot/
@@ -239,8 +239,3 @@ meeting-copilot/
 ├── .gitignore                         # Global exclusion rules
 └── README.md                          # Project documentation
 ```
-
----
-
-## 📜 License
-MIT License. Developed for high-performance, privacy-conscious multimodal meeting intelligence.
